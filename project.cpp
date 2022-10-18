@@ -154,6 +154,41 @@ void heapify(int a[], int n, int i)
         heapify(a, i, 0);  
     }  
 }   
+  
+  //quick sort
+  int partition (int a[], int start, int end)  
+{  
+    int pivot = a[end]; // pivot element  
+    int i = (start - 1);  
+  
+    for (int j = start; j <= end - 1; j++)  
+    {  
+        // If current element is smaller than the pivot  
+        if (a[j] < pivot)  
+        {  
+            i++; // increment index of smaller element  
+            int t = a[i];  
+            a[i] = a[j];  
+            a[j] = t;  
+        }  
+    }  
+    int t = a[i+1];  
+    a[i+1] = a[end];  
+    a[end] = t;  
+    return (i + 1);  
+}  
+
+
+
+    void quick(int a[], int start, int end) /* a[] = array to be sorted, start = Starting index, end = Ending index */  
+    {  
+    if (start < end)  
+    {  
+        int p = partition(a, start, end);  //p is the partitioning index  
+        quick(a, start, p - 1);  
+        quick(a, p + 1, end);  
+    }  
+    }  
 
   
   //printing the array
@@ -184,7 +219,7 @@ if(q==1)
     for (int i = 0; i < m; i++)   
     cout<<ar[i]<<" ";
 
-    cout<<"\n which type of sorting you want to perform: \n 1.Bubble \n 2.heap sort \n 3."<<"\n";
+    cout<<"\n which type of sorting you want to perform: \n 1.Bubble \n 2.heap sort \n 3.quick sort "<<"\n";
     cin>>v;
 
     switch (v)
@@ -195,6 +230,10 @@ if(q==1)
 
         case 2:
         heapSort(ar, m); 
+        print(ar, m);
+
+        case 3:
+        quick(ar, 0, m - 1);
         print(ar, m);
     }
 
